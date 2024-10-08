@@ -1,0 +1,80 @@
+---
+title: "Week3 Table"
+author: "ZEYU XIA"
+date: "2024-08-06"
+output: html_document
+---
+
+The first thing to do is importing our data
+```{r}
+Data <- read.table("Drosophila.stats", header = FALSE, sep = " ")
+```
+
+Create a new data frame to store information
+
+```{r}
+Len <- nrow(Data)
+Result <- data.frame(ORF=rep(0,Len/10), Pol=rep(0,Len/10))
+for (i in seq(1, 10)) {
+  Result[as.character(i)] <- rep(0,Len/10)
+} 
+```
+
+Transfer data from the original table to the new data frame
+
+```{r}
+for (i in seq(1, Len/10)) {
+  if ((10*i)%%10==0) {
+    Result[i, 1] <- Data[10*i,1]
+  }
+}
+```
+
+Transfer the annotation.
+
+```{r}
+for (i in seq(1, Len)) {
+    Result[1+(i-1)%/%10, 2+Data[i, 3]] <- Data[i, 2]
+}
+```
+
+Count the number of successful match with RT/INT for each ORF.
+
+```{r}
+Pool <- c("INT", "Int", "int")
+Pool2 <- c("RT", "Rt", "rt")
+for (i in seq(1, Len/10)) {
+  for (n in seq(3, 12)) {
+    if (substr(Result[i,n], 1, 3) %in% Pool|substr(Result[i,n], 1, 2) %in% Pool2) {
+      Result[i, 2]=Result[i,2]+1
+    }
+  }
+}
+```
+
+Mark out ORFs that have a count larger than (or equal to) 5
+
+```{r}
+Result$POL <- rep(0,Len/10)
+for (i in seq(1, Len/10)) {
+  if (Result[i, 2]>=5) {
+    Result[i, 13] <- "T"
+  }
+  else  {
+    Result[i, 13] <- "F"
+  }
+}
+```
+
+Output the final result
+
+```{r}
+write.csv(Result, "Result.csv", row.names = FALSE)
+```
+
+
+
+
+
+
+

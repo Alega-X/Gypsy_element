@@ -15,6 +15,8 @@ LENGTH="length of the conserved part"
 fasta_formatter -i ${output_mafft_fasta} -t | awk '{print ">"$1"\n"substr($2,START,LENGTH)}' > ${output_mafft_trimmed_fasta}
 
 ### perform phylogenetic analysis using iqtree
-export PATH="/g/data/lf10/tools/iqtree-1.6.12-Linux/bin/:${PATH}"
+qsub -v output_mafft_fasta=${output_mafft_fasta} -P lf10 -l walltime=15:00:00,mem=100GB,ncpus=12,storage=scratch/lf10+gdata/lf10,jobfs=100GB -q expresssr -o /home/150/zx6715/logs/ -e /home/150/zx6715/logs/ /scratch/lf10/zx6715/scripts/iqtree_job.sh
 
-iqtree -redo -s ${output_mafft_trimmed_fasta} -m rtREV+R4 -bb 1000 -nt 8
+#Job content (iqtree_job.sh)
+export PATH="/g/data/lf10/tools/iqtree-1.6.12-Linux/bin/:${PATH}"
+iqtree -redo -s ${output_mafft_fasta} -m rtREV+R4 -bb 1000 -nt 8

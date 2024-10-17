@@ -52,7 +52,7 @@ for (i in seq(1, Len/10)) {
 }
 ```
 
-Mark out ORFs that have a count larger than (or equal to) 5
+Mark out ORFs that have a count that no less than 5
 
 ```{r}
 Result$POL <- rep(0,Len/10)

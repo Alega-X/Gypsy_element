@@ -20,7 +20,7 @@ awk '
 gene=$(echo "$gene" | sed 's/>//')
 FILE="${DIRECTORY}/hhr/${gene}.hhr"
 if [[ -f $FILE ]]; then
-### RT, including hits that cover RT regions of 4MH8_A and 4G10_B allowing them to miss 30aa at either ends
+### RT, including hits that cover RT regions of 4MH8_A and 4G1Q_B allowing them to miss 30aa at either ends
 awk -v gene=${gene} '{split($12,a,"-"); split($11,b,"-"); if ($2=="4MH8_A" && NF==13 && a[1]<59 && a[2]>395) print gene,b[1]-a[1]+17,b[2]-a[2]+451;
 else if ($2=="4G1Q_B" && NF==13 && a[1]<38 && a[2]>374) print gene,b[1]-a[1]-4,b[2]-a[2]+430}' $FILE |\
 awk -v SIZE=${SIZE} '{if($3>SIZE) $3=SIZE; if($2<0) $2=0; print}'

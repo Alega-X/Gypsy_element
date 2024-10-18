@@ -22,7 +22,7 @@ fi
 done
 done
 
-#Job content start (cluster_job.sh)
+#Job content -start- (cluster_job.sh)
 export PATH="/home/150/zx6715/miniconda3/bin:$PATH"
 export PATH="/g/data/lf10/tools/fastx_toolkit-0.0.14/bin/:${PATH}"
 
@@ -42,3 +42,4 @@ echo ">"${COORDINATE}":"${STRAND}":GAG_POL" >> ${DIRECTORY_Zeyu}/${CLASS}/tblast
 echo ${GAG_POL} >> ${DIRECTORY_Zeyu}/${CLASS}/tblastn_results/${ASSEMBLY}_${SPECIES}_GAG-POL_preset.no-nearby-ENV.GAG_POL.GAG-and-POL.pep
 done
 mmseqs easy-cluster ${DIRECTORY_Zeyu}/${CLASS}/tblastn_results/${ASSEMBLY}_${SPECIES}_GAG-POL_preset.no-nearby-ENV.GAG_POL.GAG-and-POL.pep ${MMRESULT}/${ASSEMBLY}_${SPECIES} /home/150/zx6715/tmp --min-seq-id 0.5 -c 0.8 --cov-mode 1
+#Job content -end-

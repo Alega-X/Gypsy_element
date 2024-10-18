@@ -1,5 +1,5 @@
-input_fasta="/scratch/lf10/zx6715/analysis/diptera/diptera.RT_extended.commandline_hhpred.fasta"
-output_mafft_fasta="/scratch/lf10/zx6715/analysis/diptera/mafft_output.fasta"
+input_fasta="/scratch/lf10/zx6715/analysis/diptera/Diptera_1193_merge.fasta"
+output_mafft_fasta="/scratch/lf10/zx6715/analysis/diptera/Diptera1193_2nd_mafft_output.fasta"
 
 ### make a multiple sequence alignment using mafft
 export PATH="/g/data/lf10/tools/mafft-7.505/bin/:${PATH}"

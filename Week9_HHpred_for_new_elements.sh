@@ -6,7 +6,7 @@ DIRECTORY_Zeyu="/scratch/lf10/zx6715/analysis"
 MMSEQS="/scratch/lf10/zx6715/analysis/mmseqs"
 
 #We start from Palaeoptera, then: Polyneoptera, Hemiptera, Hymenoptera, Coleoptera, Lepidoptera
-#There is too many elements in Lepidoptera that qsub cannot complete analysis at once. We repeat it again with if loop to select the
+#There is too many elements in Lepidoptera that the qsub command cannot analyze all elements at a time. We need to submit again for elements left.
 #CLASS="Diptera"
 CLASS="Lepidoptera"
 #CLASS="Coleoptera"
@@ -18,7 +18,7 @@ CLASS="Lepidoptera"
 MMRESULT="${MMSEQS}/${CLASS}"
 mkdir -p ${DIRECTORY_Zeyu}/rep_hhpred/hhr/${CLASS}
 
-#Read the list to go over all of species for each class
+#Read the simplified assemblies list to go over all of species for each class
 cat ${DIRECTORY_Zeyu}/Class_list/${CLASS}_list.txt | while read ASSEMBLY SPECIES FAMILY SIZE; do
 
 #For species containing representative elements, read the summary file, extract sequence for each single element and submit a HHpred job
